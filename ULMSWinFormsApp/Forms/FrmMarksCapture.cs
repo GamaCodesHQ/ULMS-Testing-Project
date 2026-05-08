@@ -18,15 +18,30 @@ namespace ULMSWinFormsApp.Forms
 
         private void btnCalculateResults_Click(object sender, EventArgs e)
         {
-            // Intentional weak validation and faulty average logic for testing purposes
-            MarkRecord record = new MarkRecord();
+            // Fixed Validation in 3 steps Trial and Error approach
 
+            // 1. Initialize the record
+            MarkRecord record = new MarkRecord();
             record.StudentId = txtMarkStudentId.Text;
             record.StudentName = txtMarkStudentName.Text;
-            record.Subject1 = Convert.ToDouble(txtSubject1.Text);
-            record.Subject2 = Convert.ToDouble(txtSubject2.Text);
-            record.Subject3 = Convert.ToDouble(txtSubject3.Text);
 
+            // 2. Defensive Programming: Validate all inputs before calculation
+            // We use double.TryParse to avoid System.FormatException crashes
+            bool s1Valid = double.TryParse(txtSubject1.Text, out double s1);
+            bool s2Valid = double.TryParse(txtSubject2.Text, out double s2);
+            bool s3Valid = double.TryParse(txtSubject3.Text, out double s3);
+
+            if (!s1Valid || !s2Valid || !s3Valid)
+            {
+                MessageBox.Show("Please enter valid numeric marks for all subjects.",
+                                "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Stop execution if inputs are invalid
+            }
+
+            // 3. Assign validated values to the record
+            record.Subject1 = s1;
+            record.Subject2 = s2;
+            record.Subject3 = s3;
             // corrected average calculation to divide by 3 instead of 2
             record.Average = (record.Subject1 + record.Subject2 + record.Subject3) / 3;
 
