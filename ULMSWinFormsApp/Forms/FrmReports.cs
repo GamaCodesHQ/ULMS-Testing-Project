@@ -17,12 +17,17 @@ namespace ULMSWinFormsApp.Forms
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
-            // Intentional weak validation and slow processing for testing purposes
+            // Added a check to ensure a report type is selected before generating the report
+            if (string.IsNullOrEmpty(cmbReportType.Text))
+            {
+                MessageBox.Show("Please select a report type first.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string reportType = cmbReportType.Text;
             string studentId = txtReportStudentId.Text;
 
-            // Intentional poor performance simulation
-            Thread.Sleep(4000);
+            // performance optimization not needed as the report generation is already slow due to the StringBuilder usage
 
             StringBuilder report = new StringBuilder();
 

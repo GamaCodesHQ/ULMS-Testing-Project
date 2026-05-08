@@ -27,8 +27,9 @@ namespace ULMSWinFormsApp.Forms
             record.Subject2 = Convert.ToDouble(txtSubject2.Text);
             record.Subject3 = Convert.ToDouble(txtSubject3.Text);
 
-            // Intentional faulty calculation
-            record.Average = record.Subject1 + record.Subject2 + record.Subject3 / 3;
+            // corrected average calculation to divide by 3 instead of 2
+            record.Average = (record.Subject1 + record.Subject2 + record.Subject3) / 3;
+
 
             if (record.Average >= 50)
             {
