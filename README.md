@@ -124,7 +124,7 @@ Follow these steps carefully.
 
 Open Command Prompt or Git Bash:
 
-git clone https://github.com/lusuJR/ULMSWinFormsAppClient.git
+git clone https://github.com/GamaCodesHQ/ULMS-Testing-Project
 
 
 ## Step 2 — Open the Solution
